@@ -11,22 +11,27 @@ class Spaceship extends Floater
     xCorners[2] = -8;
     yCorners[2] = 8;
     myColor = 255;
-    myCenterX = 200;
-    myCenterY = 200;
+    myCenterX = 500;
+    myCenterY = 500;
     myXspeed = 0;
     myYspeed = 0;
     myPointDirection = 0;
   }
-  public void hyperspace(){
-     myCenterX = Math.random() * 400;
-     myCenterY = Math.random() * 400;
+  private void hyperspace(){
+     myCenterX = Math.random() * 1000;
+     myCenterY = Math.random() * 1000;
      myXspeed = 0;
      myYspeed = 0;
      myPointDirection = Math.random() * 360; 
   }
-  public void deccelerate (double dAmount){  
+  private void deccelerate (double dAmount){  
     double dRadians = myPointDirection*(Math.PI/180);
     myXspeed -= ((dAmount) * Math.cos(dRadians));    
     myYspeed -= ((dAmount) * Math.sin(dRadians));       
-  }   
+  }
+  public float getsX(){return (float)myCenterX;}
+  public float getsY(){return (float)myCenterY;}
+  public float getsXspeed(){return (float)myXspeed;}
+  public float getsYspeed(){return (float)myYspeed;}
+  public double getPoint(){return myPointDirection;}
 }
