@@ -1,9 +1,9 @@
-//your variable declarations here
 Spaceship drag = new Spaceship();
 Star [] lumin = new Star[500];
+Bullet bill = new Bullet(drag);
 ArrayList <Asteroid> boom = new ArrayList <Asteroid>();
-boolean wPress, aPress, sPress, dPress = false;
-public void setup() 
+boolean wPress, aPress, sPress, dPress, bPress, space = false;
+public void setup()
 {
   size(1000, 1000);
   background(0);
@@ -14,7 +14,7 @@ public void setup()
   for(int j = 0; j < lumin.length; j++){
     lumin[j].show();
   }
-  for(int i = 0; i < 20; i++){ 
+  for(int i = 0; i < 20; i++){
     Asteroid roid = new Asteroid();
     boom.add(roid);
   }
@@ -28,6 +28,10 @@ public void draw()
   for(int i = 0; i < boom.size(); i++){
     boom.get(i).aShow();
     boom.get(i).aMove();
+    float d = dist(drag.getsX(), drag.getsY(), boom.get(i).getX(), boom.get(i).getY());
+    if(d < 50){
+      boom.remove(i);
+    }
   }
   drag.move();
   drag.show();
@@ -42,6 +46,11 @@ public void draw()
   }
   if(dPress){
     drag.turn(3);
+  }
+  if(space){
+     bill.setPoint(drag.getPoint());
+    bill.move();
+    bill.show();
   }
 }
 public void keyPressed(){
@@ -59,6 +68,11 @@ public void keyPressed(){
   }
   if(key == 'e'){
     drag.hyperspace();
+  }
+  if(key == ' '){
+    space = true;
+    bill.setX(drag.getsX());
+    bill.setY(drag.getsY());
   }
 }
 public void keyReleased(){
