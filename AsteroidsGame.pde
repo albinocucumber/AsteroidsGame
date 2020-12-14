@@ -67,6 +67,11 @@ public void draw()
       }
     }
   }
+  if(boom.size() == 0){
+    fill(255);
+    textSize(50);
+    text("You Win!", 350, 500);
+  }
 }
 public void keyPressed(){
   if(key == 'w'){
