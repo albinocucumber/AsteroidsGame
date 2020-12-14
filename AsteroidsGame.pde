@@ -28,10 +28,11 @@ public void draw()
   for(int i = 0; i < boom.size(); i++){
     boom.get(i).aShow();
     boom.get(i).aMove();
-    float d = dist(drag.getsX(), drag.getsY(), boom.get(i).getX(), boom.get(i).getY());
-    //float d = dist(shots.bulletx(), shots.bullety(), boom.get(i).getX(), boom.get(i).getY());
-    if(d < 50){
-      boom.remove(i);
+  }
+  for(int t = 0; t < boom.size(); t++){
+    float e = dist(drag.getsX(), drag.getsY(), boom.get(t).getX(), boom.get(t).getY());
+    if(e < 30){
+      noLoop();
     }
   }
   drag.move();
@@ -48,14 +49,18 @@ public void draw()
   if(dPress){
     drag.turn(3);
   }
-  if(space){
-    shots.add(new Bullet(drag));
-    //bill.setPoint(drag.getPoint());
-    for(int i = 0; i < shots.size(); i++){
-      shots.get(i).move();
-      shots.get(i).show();
-      if((shots.get(i).bulletx() > 1000 || shots.get(i).bulletx() < 0) || (shots.get(i).bullety() > 1000 || shots.get(i).bullety() < 0)){
-        shots.remove(i);
+  for(int i = 0; i < shots.size(); i++){
+    shots.get(i).move();
+    shots.get(i).show();
+    if((shots.get(i).bulletx() > 1000 || shots.get(i).bulletx() < 0) || (shots.get(i).bullety() > 1000 || shots.get(i).bullety() < 0)){
+      shots.remove(i);
+    }
+  }
+  for(int j = 0; j < shots.size(); j++){
+    for(int x = 0; x < boom.size(); x++){
+      float d = dist((float)shots.get(j).bulletx(), (float)shots.get(j).bullety(), boom.get(x).getX(), boom.get(x).getY());
+      if(d < 50){
+        boom.remove(x);
       }
     }
   }
@@ -77,9 +82,7 @@ public void keyPressed(){
     drag.hyperspace();
   }
   if(key == ' '){
-    space = true;
-    /*bill.setX(drag.getsX());
-    bill.setY(drag.getsY());*/
+    shots.add(new Bullet(drag));
   }
 }
 public void keyReleased(){
