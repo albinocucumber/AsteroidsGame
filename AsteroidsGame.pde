@@ -32,6 +32,9 @@ public void draw()
   for(int t = 0; t < boom.size(); t++){
     float e = dist(drag.getsX(), drag.getsY(), boom.get(t).getX(), boom.get(t).getY());
     if(e < 30){
+      fill(255);
+      textSize(50);
+      text("Game Over", 350, 500);
       noLoop();
     }
   }
