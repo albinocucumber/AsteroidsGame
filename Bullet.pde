@@ -2,15 +2,19 @@ class Bullet extends Floater{
   public Bullet(Spaceship theShip){
     myCenterX = theShip.getsX();
     myCenterY = theShip.getsY();
-    myPointDirection = theShip.getPoint();
     myXspeed = theShip.getsXspeed();
     myYspeed = theShip.getsYspeed();
-    accelerate(2);
+    myPointDirection = theShip.getPoint();
+    accelerate(.6);
   }
   public void show(){
     ellipse((float)myCenterX, (float)myCenterY, 10, 10);
   }
-  public void setX(double x){myCenterX = x;}
-  public void setY(double y){myCenterY = y;}
-  public void setPoint(double z){myPointDirection = z;}
+  public void move(){      
+    //change the x and y coordinates by myXspeed and myYspeed       
+    myCenterX += myXspeed;    
+    myCenterY += myYspeed;
+  }   
+  public double bulletx(){return myCenterX;}
+  public double bullety(){return myCenterY;}
 }
